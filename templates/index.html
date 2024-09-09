@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo API10:2023</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Demo: API10:2023 - Consumo Inseguro de APIs</h1>
+        <form id="direccion-form">
+            <label for="direccion">Ingresa una dirección:</label><br>
+            <input type="text" id="direccion" name="direccion" required>
+            <button type="submit">Enviar</button>
+        </form>
+        <p id="resultado"></p>
+
+        <!-- Botón para eliminar todas las direcciones -->
+        <button id="eliminar-todas-btn">Eliminar todas las direcciones</button>
+
+        <!-- Botón para ver la lista de direcciones en una página separada -->
+        <a href="/listar_direcciones" id="listar-btn">Ver Direcciones Almacenadas</a>
+    </div>
+
+    <script>
+        document.getElementById('direccion-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var direccion = document.getElementById('direccion').value;
+            var formData = new FormData();
+            formData.append('direccion', direccion);
+
+            fetch('/procesar_direccion', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('resultado').innerText = data.resultado;
+            })
+            .catch(error => {
+                document.getElementById('resultado').innerText = 'Error: ' + error;
+            });
+        });
+
+        document.getElementById('eliminar-todas-btn').addEventListener('click', function() {
+            if (confirm("¿Estás seguro de que deseas eliminar todas las direcciones?")) {
+                fetch('/eliminar_direcciones', {
+                    method: 'POST',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.resultado);
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error al eliminar las direcciones:', error);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

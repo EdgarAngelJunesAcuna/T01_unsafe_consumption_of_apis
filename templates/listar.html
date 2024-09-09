@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direcciones Almacenadas</title>
+    <style>
+        table {
+            width: 50%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Direcciones Almacenadas</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+        </tr>
+        {% for direccion in direcciones %}
+        <tr>
+            <td>{{ direccion[0] }}</td>
+            <td>{{ direccion[1] }}</td>
+            <td>
+                <button onclick="eliminarDireccion('{{ direccion[0] }}')">Eliminar</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        function eliminarDireccion(id) {
+            if (confirm("¿Estás seguro de que deseas eliminar esta dirección?")) {
+                fetch(`/eliminar_direccion/${id}`, {
+                    method: 'POST',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.resultado);
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error al eliminar la dirección:', error);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

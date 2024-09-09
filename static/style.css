@@ -1,0 +1,58 @@
+/* Estilo para el botón */
+button {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049; /* Verde más oscuro al pasar el mouse */
+}
+
+/* Otros estilos */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+#resultado {
+    margin-top: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+a#listar-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+a#listar-btn:hover {
+    background-color: #555; /* Cambiar color del botón al pasar el ratón */
+}
